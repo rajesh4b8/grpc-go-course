@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	addr = "0.0.0.0:50051"
+	addr = "127.0.0.1:50051"
 )
 
 type Server struct {
@@ -26,6 +26,7 @@ func main() {
 	log.Printf("Listening on %s\n", addr)
 
 	s := grpc.NewServer()
+	pb.RegisterGreetServiceServer(s, &Server{})
 
 	if err = s.Serve(lis); err != nil {
 		log.Fatalf("Failed to Serve: %v\n", err)
